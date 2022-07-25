@@ -1,6 +1,6 @@
 $(document).ready(function() {
-  const apiRoot = 'https://kodilla-tasks-wm.herokuapp.com/v1/tasks';
-  const trelloApiRoot = 'https://kodilla-tasks-wm.herokuapp.com/v1/trello';
+  const apiRoot = 'https://kodilla-tasks-wm.herokuapp.com/v1/tasks/';
+  const trelloApiRoot = 'https://kodilla-tasks-wm.herokuapp.com/v1/trello/';
   const datatableRowTemplate = $('[data-datatable-row-template]').children()[0];
   const $tasksContainer = $('[data-tasks-container]');
 
@@ -12,7 +12,7 @@ $(document).ready(function() {
   getAllTasks();
 
   function getAllAvailableBoards(callback, callbackArgs) {
-    var requestUrl = trelloApiRoot + '/boards';
+    var requestUrl = trelloApiRoot + 'boards';
 
     $.ajax({
       url: requestUrl,
@@ -63,7 +63,7 @@ $(document).ready(function() {
   }
 
   function getAllTasks() {
-    const requestUrl = apiRoot;
+    const requestUrl = apiRoot + 'tasks';
 
     $.ajax({
       url: requestUrl,
@@ -84,7 +84,7 @@ $(document).ready(function() {
     var taskId = parentEl.attr('data-task-id');
     var taskTitle = parentEl.find('[data-task-name-input]').val();
     var taskContent = parentEl.find('[data-task-content-input]').val();
-    var requestUrl = apiRoot;
+    var requestUrl = apiRoot + 'tasks';
 
     $.ajax({
       url: requestUrl,
@@ -108,7 +108,7 @@ $(document).ready(function() {
   function handleTaskDeleteRequest() {
     var parentEl = $(this).parents('[data-task-id]');
     var taskId = parentEl.attr('data-task-id');
-    var requestUrl = apiRoot;
+    var requestUrl = apiRoot + 'tasks';
 
     $.ajax({
       url: requestUrl + '/' + taskId,
@@ -125,7 +125,7 @@ $(document).ready(function() {
     var taskTitle = $(this).find('[name="title"]').val();
     var taskContent = $(this).find('[name="content"]').val();
 
-    var requestUrl = apiRoot;
+    var requestUrl = apiRoot + 'tasks';
 
     $.ajax({
       url: requestUrl,
@@ -166,7 +166,7 @@ $(document).ready(function() {
   }
 
   function handleCardCreationRequest(event) {
-    var requestUrl = trelloApiRoot + '/cards';
+    var requestUrl = trelloApiRoot + 'cards';
     var $relatedTaskRow = $(event.target).parents('[data-task-id]');
     var relatedTaskId = $relatedTaskRow.attr('data-task-id');
     var relatedTask = availableTasks[relatedTaskId];
